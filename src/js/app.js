@@ -5,16 +5,17 @@ export default class Team {
   }
 
   add(hero) {
-    this.member.add(hero);
+    if (this.member.has(hero.name)) {
+      throw new Error('already was added');
+    }
+    this.member.add(hero.name);
   }
 
   addAll(heroes) {
-    heroes.forEach((hero) => this.member.add(hero));
+    heroes.forEach((hero) => this.member.add(hero.name));
   }
 
   toArray() {
-    const result = [];
-    this.member.forEach((hero) => result.push(hero.name));
-    return result;
+    return Array.from(this.member);
   }
 }

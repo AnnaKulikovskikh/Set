@@ -10,18 +10,20 @@ const allHero = [first, second, third, forth, fifth];
 
 const team = new Team();
 
-test('repeating add', () => {
+test('add', () => {
   team.add(first);
   team.add(second);
-  team.add(first);
-  team.add(first);
   const expected = ['first', 'second'];
   expect(team.toArray()).toEqual(expected);
 });
 
+test('repeating add', () => {
+  expect(() => team.add(first)).toThrow('already was added');
+});
+
 test('addAll', () => {
-  team.add(first);
-  team.add(second);
+  team.add(third);
+  team.add(forth);
   team.addAll(allHero);
   const expected = ['first', 'second', 'third', 'forth', 'fifth'];
   expect(team.toArray()).toEqual(expected);
